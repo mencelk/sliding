@@ -7,14 +7,26 @@ gameState = [
     [gameTiles[6], gameTiles[7], gameTiles[8]]
 ];
 
+const array = [0, 1, 2, 3, 4, 5, 6, 7];
+const shuffledArray = array.sort((a, b) => 0.5 - Math.random());
+
+for (let i = 0; i < shuffledArray.length; i++) {
+  let x = Math.floor(i / 3);
+  let y = i % 3;
+  gameState[x][y].innerText = shuffledArray[i];
+}
+
 function render(gameBoard, gameState) {
   gameState.forEach((row, rowIndex) => {
     row.forEach((column, columnIndex) => {
+      let rowNumber = Math.floor(column.innerText / 3);
+      let columnNumber = column.innerText % 3;
+
       column.style.top = `${rowIndex * 100}px`;
       column.style.left = `${columnIndex * 100}px`;
 
-      column.style['background-position-y'] = `-${rowIndex * 100}px`;
-      column.style['background-position-x'] = `-${columnIndex * 100}px`;
+      column.style['background-position-y'] = `-${rowNumber * 100}px`;
+      column.style['background-position-x'] = `-${columnNumber * 100}px`;
 
       gameBoard.appendChild(column);
     })
